@@ -1,4 +1,3 @@
-var StringDecoder = require('string_decoder').StringDecoder
 
 module.exports = function(src) {
   return new Simple(src)
@@ -7,7 +6,7 @@ module.exports = function(src) {
 function Simple(src) {
   this.src = src
   this.closed = false
-  this.ended = true
+  this.ended = false
   this.queue = []
   this._push = null
   this.init()
@@ -38,7 +37,6 @@ Simple.prototype.init = function() {
   this.src.pause()
 }
 
-
 Simple.prototype.read = function(cb) {
   var call = this.queue.shift()
   if (call) return cb.apply(null, call)
@@ -58,53 +56,4 @@ Simple.prototype.push = function(err, data) {
   this._push = null
   if (push) return push(err, data)
   this.queue.push(arguments)
-}
-
-Simple.prototype.consume = function(encoding, cb) {
-  if (typeof encoding == 'function') {
-    cb = encoding
-    encoding = null
-  }
-
-  var binary = !encoding
-    , push
-    , end
-
-  if (binary) {
-    var chunks = []
-    var length = 0
-
-    push = function(chunk) {
-      length += chunk.length
-      chunks.push(chunk)
-    }
-
-    end = function() {
-      return Buffer.concat(chunks, length)
-    }
-  } else {
-    var decoder = new StringDecoder(encoding)
-    var out = ''
-
-    push = function(chunk) {
-      out += decoder.write(chunk)
-    }
-
-    end = function() {
-      return out + decoder.end()
-    }
-  }
-
-  var self = this
-
-  ;(function read() {
-    var async = false
-    self.read(function(err, chunk) {
-      if (err) return cb(err)
-      if (!chunk) return cb(null, end())
-      push(chunk)
-      async ? read() : process.nextTick(read)
-    })
-    async = true
-  })()
 }
