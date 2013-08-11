@@ -54,8 +54,8 @@ node's standard signature `cb(err, item)`. The following rules apply:
   * Data chunk/item MUST be indicated as `cb(null, item)` where `item !== undefined`
   * Error MUST be indicated as `cb(err)` where `err` is an instance of `Error`
   * Stream MUST destroy itself and release all underlying resources in case it reports
-  an error or EOF to `.read()` callback, however the exact moment of cleanup completion is undefined.
-  * if stream is in a destroyed state it MUST return an error to `.read()`, however
+  an error or EOF to read callback, however the exact moment of cleanup completion is undefined.
+  * If stream is in a destroyed state it MUST return an error to read callback, however
   streams which supply data from some sort of internal queue MAY return already buffered
   data first.
   * Stream MAY (and it's recommended to) ignore stack overflow concerns and call callbacks synchronously.
