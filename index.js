@@ -34,6 +34,8 @@ Simple.prototype.init = function() {
     self.closed = true
     self.push(new Error('The stream is destroyed'))
   })
+
+  this.src.pause()
 }
 
 
