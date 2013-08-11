@@ -43,7 +43,7 @@ via npm
 npm install stream-simple
 ```
 
-##spec
+##Spec
 
 Simple stream is an object with two methods `.read(cb)` and `.abort([cb])`.
 
@@ -74,7 +74,7 @@ The following rules apply:
 
   1. It is a complexity
   2. It is not always needed
-  3. It can be done with separate util without issues
+  3. It could be done with separate util without issues
   4. There is no performance benefits
 
 The last argument requires some clarification. There are types
@@ -87,7 +87,7 @@ I am personally aware of the typical size of "optimal" chunk is much larger
 than a typical size of protocol headers. Even if some parser currently wants
 only 100b it's almost always better to pull 10kb in advance. On other hand there is no
 much overhead in pulling 10kb instead of 100b as well as pulling 100kb in 10kb chunks.
-Also that "optimal" chunk size is known at the moment of stream creation and there is no
+Also that "optimal" chunk size is known at the moment of stream construction and there is no
 need to pass it from outside.
 
 Finally if some stream want's to support reading of certain amount of bytes it may do so,
