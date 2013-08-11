@@ -1,6 +1,6 @@
 {
   "name": "stream-simple",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Readable to Simple stream converter",
   "keywords": [
     "stream",
