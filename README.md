@@ -60,12 +60,11 @@ node's standard signature `cb(err, item)`. The following rules apply:
   data first.
   * Stream MAY (and it's recommended to) ignore stack overflow concerns and call callbacks synchronously.
 
-The `.abort()` method is typically used for processing interruption.
-It is a signal to release all underlying resources.
-It accepts optional callback function with `cb(err)` signature which is called after completion of cleanup procedure.
+The `.abort()` method is a signal to release all underlying resources.
+It accepts optional callback function with `cb(err)` signature.
 The following rules apply:
 
-  * Stream MUST handle multiple `.abort()` calls
+  * Stream MUST handle multiple abort calls
   * Stream MUST call abort callbacks and only after completion of cleanup procedure
   * Stream MAY pass errors occured on cleanup to abort callbacks.
 
