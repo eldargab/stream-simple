@@ -96,7 +96,7 @@ however general purpose APIs should not rely on that.
 ###We taught that callbacks should always be called asynchronously
 
   1. Not all JavaScript environments have efficient `process.nextTick`
-  and even in node it can be performance overhead
+  and even on node it can be performance overhead
   2. With introduction of TCO by ES6 all that "next tick" stuff will become
   legacy quite soon
   3. It's not a problem. Indeed all edge cases could be handled
