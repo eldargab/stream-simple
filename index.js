@@ -1,7 +1,8 @@
-
-module.exports = function(src) {
+exports = module.exports = function(src) {
   return new Simple(src)
 }
+
+exports.Stream = Simple
 
 function Simple(src) {
   this.src = src
